@@ -20,7 +20,6 @@
                     <thead>
                         <tr>
                             <th>Image</th>
-                            <th>UpdateDate</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,23 +30,19 @@
                                     <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/hero/@item.Image" />
 
                                 </td>
-                                <td>
-                                    @item.UpdateDate
-                                </td>
                                 <td style="vertical-align:middle; text-align:center;">
                                     <a title="See Details" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                                    <a title="Edit HeroText" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                   @* <a title="Edit HeroText" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>*@
 
                                     @if (@Model.Count() > 1)
                                     {
-                                        <a title="Edit HeroText" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-pencil"></i></a>
+                                        <a title="Delete HeroText" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-carbage"></i></a>
                                     }
                                 </td>
                             }
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>

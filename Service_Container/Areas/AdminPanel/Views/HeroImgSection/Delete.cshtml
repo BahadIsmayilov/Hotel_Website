@@ -1,12 +1,9 @@
-﻿@model HeroTextSection
+﻿@model HeroImgSection
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <p><b>Title</b></p> @Model.Title
-        </div>
-        <div class="col-12">
-            <p><b>Description </b> </p> @Model.Description
+            <p><b>Image</b></p> <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/hero/@Model.Image" />
         </div>
     </div>
 </div>
@@ -17,7 +14,7 @@
             <div class="alert alert-danger">
                 <p style="padding-top:0;"><b>Are you sure to delete this HeroTextSection</b></p>
             </div>
-            <input type="submit" value="Delete" class="btn btn-block btn-lg btn-danger"/>
+            <input type="submit" value="Delete" class="btn btn-block btn-lg btn-danger" />
         </form>
         <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
             <i class="fas fa-long arrow-alt-left"></i> Back to Index

@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-//using static Service_Container
+using static Service_Container.Extensions.IFormFileExtensions;
+using static Service_Container.Utulities.Utulitie;
+;
 
 namespace Service_Container.Areas.AdminPanel.Controllers
 {
@@ -53,30 +55,20 @@ namespace Service_Container.Areas.AdminPanel.Controllers
                 return View(heroImg);
             }
 
-            if (!heroImg.Photo.ContentType.Contains("image/"))
+            if (!heroImg.Photo.IsImage())
             {
                 ModelState.AddModelError("Photo", "File type is not valid");
                 return View(heroImg);
             }
 
-            if (heroImg.Photo.Length / 1024 / 1024 > 2)
+            if (!heroImg.Photo.IsLessThan(2))
             {
                 ModelState.AddModelError("Photo", "File size cann't be more than 2 mb");
                 return View(heroImg);
             }
-           
-
-            string path = Path.Combine(_env.WebRootPath,"img");
-
-            
-            string fileName = Guid.NewGuid().ToString() + heroImg.Photo.FileName;
-            string fileNameWithFolder = Path.Combine("hero" , fileName);
 
 
-            string resultPath = Path.Combine(path, fileNameWithFolder);
-            using (FileStream fileStream = new FileStream(resultPath, FileMode.Create)) {
-            await heroImg.Photo.CopyToAsync(fileStream);
-            };
+           string fileName= await heroImg.Photo.Save(_env.WebRootPath, "hero");
 
             heroImg.Image = fileName;
             await _context.HeroImgSections.AddAsync(heroImg);
@@ -85,5 +77,29 @@ namespace Service_Container.Areas.AdminPanel.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            HeroImgSection heroImg = await _context.HeroImgSections.FindAsync(id);
+
+            if (heroImg == null) return NotFound();
+
+            return View(heroImg);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(int? id)
+        {
+            HeroImgSection heroImg = await _context.HeroImgSections.FindAsync(id);
+
+            RemoveImage(_env.WebRootPath, "hero", heroImg.Image);
+
+            _context.HeroImgSections.Remove(heroImg);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
