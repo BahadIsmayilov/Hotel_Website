@@ -64,14 +64,11 @@ namespace Service_Container.Areas.AdminPanel.Controllers
                 ModelState.AddModelError("Photo", "File size cann't be more than 2 mb");
                 return View(heroImg);
             }
-            // tesst
+           
 
             string path = Path.Combine(_env.WebRootPath,"img");
 
-            if (Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            
             string fileName = Guid.NewGuid().ToString() + heroImg.Photo.FileName;
             string fileNameWithFolder = Path.Combine("hero" , fileName);
 
