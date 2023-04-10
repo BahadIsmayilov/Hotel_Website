@@ -1,0 +1,159 @@
+﻿@model BookingDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@*<script>
+         $(document).ready(function () {
+             $("#category").change(function () {
+                 $("#roomNumbers").empty();
+                 $.ajax({
+                     type: "GET",
+                     url: "/Rezervation/LoadRoomNumberByRoomCategoryId",
+                     dataType: "json",
+                     data: { id: $("#category").val() },
+                     success: function (cities) {
+                         $("#roomNumbers").append('<option value="' + -1 + '">' + "Select Cities" + '</option>');
+
+                         $.each(cities, function (i, city) {
+                             $("#roomNumbers").append('<option value="' + city.id + '">' + city.val + '</option>')
+                         });
+                     },
+                 });
+                 return false;
+             })
+         }
+    </script>*@
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        $(function () {
+            $('#RoomType').on('change', function () {
+                var roomTypeId = $(this).val();
+                if (roomTypeId) {
+                    $.ajax({
+                        url: '@Url.Action("LoadRoomNumberByRoomCategoryId")',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { CategoryId: roomTypeId },
+                        success: function (data) {
+                            var options = '<option value="">Select Room Number</option>';
+                            for (var i = 0; i < data.length; i++) {
+                                options += '<option value="' + data[i] + '">' + data[i] + '</option>';
+                            }
+                            $('#RoomNumber').html(options);
+                        }
+                    });
+                } else {
+                    $('#RoomNumber').html('<option value="">-- Select Room Number --</option>');
+                }
+            });
+        });
+</script>
+
+<form style="margin-left:20px; margin-right:20px; margin-top:10px" method="post">
+    <div class="form-group">
+        <label asp-for="CustomerName" class="form-label"><i class="fa fa-user"></i> Full Name</label><br />
+        <input asp-for="CustomerName" class="form-control" placeholder="John M. Doe">
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="form-label"><i class="fa fa-phone"></i> Phone</label>
+        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number">
+    </div>
+    <div class="form-group">
+        <label asp-for="PinCode" class="form-label"><i class="fa fa-id-card-o"></i> Id Card/Number</label>
+        <input asp-for="PinCode" class="form-control" placeholder="Enter Pin Code">
+    </div>
+    <div class="form-group">
+        <label asp-for="CheckIn" style="margin-top:5px"><i class='fas fa-calendar-alt'></i> Check In</label><br />
+        <input asp-for="CheckIn" class="form-control" placeholder="">
+    </div>
+    <div class="form-group">
+        <label asp-for="CheckOut" style="margin-top:5px"><i class='fas fa-calendar-alt'></i> Check Out</label>
+        <input asp-for="CheckOut" class="form-control" placeholder=""><br />
+    </div>
+    <div class="form-group">
+        <div class="categoryName">
+            <label asp-for="RoomType">Choose Room: </label>
+            <select class="form-control" asp-for="RoomType">
+                <option value="">Select Room</option>
+                @foreach (var item in ViewData["Category"] as List<HomeRoomCategorySection>)
+                {
+                    <option class="roomCategory" value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="roomNumber">
+            <label asp-for="RoomNumber">Choose RoomNumber: </label>
+            <select asp-for="RoomNumber" class="form-control">
+                <option value="">Select Room Number</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top:5px;" class="row no-margin">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label asp-for="AdultsCount" class="form-label">Adults (18+)</label><br />
+                <select asp-for="AdultsCount" class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+                <span class="select-arrow"></span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label asp-for="AdultsCount" class="form-label">Child (0-17)</label>
+                <select asp-for="ChildCount" class="form-control">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <span class="select-arrow"></span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label asp-for="ExBed" class="form-label">ExBed(0-2)</label>
+                <select asp-for="ExBed" class="form-control">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+                <span class="select-arrow"></span>
+            </div>
+        </div>
+    </div><br />
+    <span class="form-label">Ödəniş Faizi</span><br />
+    <div style="margin-top:5px;" class="row no-margin">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="PayAll" class="container">
+                    100%
+                    <input asp-for="PayAll" type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="ExBed" class="container">
+                    50%
+                    <input name="data" asp-for="PayFifty" type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success btn-block btn-lg" value="Create" />
+</form>
+<a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0; margin-left:20px">Back to Index</a>
+
+

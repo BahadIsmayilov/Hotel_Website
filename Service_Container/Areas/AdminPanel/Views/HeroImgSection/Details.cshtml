@@ -1,0 +1,24 @@
+﻿@model HeroImgSection
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p><b>Title</b></p><img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/hero/@Model.Image" />
+
+        </div>
+        <div class="col-12" style="margin-top:10px;">
+            <p><b>UpdateDate </b> </p> @Model.UpdateDate
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <a title="Edit HeroText" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-block btn-lg" style="margin: 30px 0">
+            <i class="fa fa-pencil"></i> Edit
+        </a>
+        <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+            <i class="fas fa-long arrow-alt-left"></i> Back to Index
+        </a>
+    </div>
+</div>

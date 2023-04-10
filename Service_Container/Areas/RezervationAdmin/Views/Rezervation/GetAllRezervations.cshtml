@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Booking>
+
+@{
+    ViewData["Title"] = "GetAllRezervations";
+}
+
+<h1>Rezerved Customer</h1>
+
+<form method="get" asp-area="RezervationAdmin" asp-controller="Rezervation" asp-action="GetAllRezervations">
+    <p>
+        <input type="search" placeholder="Enter CustomerName" value="@ViewData["GetCustomer"]" name="customerName" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>Customer FullName</th>
+            <th>Room Type</th>
+            <th>Room Number</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Payment Status</th>
+            <th>Order Status</th>
+            <th>Configuration</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+        <tr>
+            <td>
+                @book.CustomerName
+            </td>
+            <td>
+                @book.Roomtype
+            </td>
+            <td>
+                @book.RoomNumber
+            </td>
+            <td>
+                @book.CheckIn
+            </td>
+            <td>
+                @book.CheckOut
+            </td>
+            <td>
+                @book.Payments.PaymentStatus
+            </td>
+            <td id="status">
+                @book.RoomOrderStatus.Status
+            </td>
+            <td style="vertical-align:middle; text-align:center;">
+                <a onclick="editStatus(@book.Id)" title="Edit Status to Occupied" asp-area="RezervationAdmin" asp-route-id="@book.Id" asp-controller="Rezervation"  asp-action="UpdateOrderStatus" class="btn btn-success">Change RoomStatus</a>
+                @*<a title="Edit Status to Avaliable" asp-action="" value="avaliable" class="btn btn-success">Avaliable</a>*@
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

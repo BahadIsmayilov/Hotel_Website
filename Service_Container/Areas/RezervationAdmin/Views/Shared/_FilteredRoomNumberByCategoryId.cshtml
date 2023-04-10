@@ -1,0 +1,5 @@
+﻿@model IEnumerable<HomeRoomSection>
+    @foreach (var room in Model)
+    {
+    <option value="@room.Id">@room.RoomNumber</option>
+    }

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BlogsSection> 
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Blog</h2>
+                    <div class="bt-option">
+                        <a href="/Home/">Home</a>
+                        <span>Blog Grid</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<!-- Blog Section Begin -->
+<input type="hidden" id="blogsCount" value="@ViewBag.TotalCount"/>
+<section class="blog-section blog-page spad">
+    <div class="container">
+        <div class="row main-row">
+          <partial name="_BlogsPartial" model="Model"/>
+        </div>
+        <div class="row">
+            <button id="load_more" class="btn btn-outline-primary w-50 mx-auto my-5">Load More</button>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<BlogsSection> 
+
+@for (int i = 0; i < Model.Count(); i++)
+{
+    int @day = @Model.ElementAt(i).TravelDate.Day;
+    int @year = @Model.ElementAt(i).TravelDate.Year;
+    DateTime @myDate = @Model.ElementAt(i).TravelDate;
+    string @mon = @myDate.ToString("MMM");
+    <div class="col-lg-4 col-md-6">
+        <div class="blog-item set-bg" data-setbg="img/blog/@Model.ElementAt(i).BlogsImageSections.FirstOrDefault().Image" style="background-image: url(" img /blog/@Model.BlogsSections.ElementAt(i).BlogsImageSections.FirstOrDefault().Image");">
+            <img style="height:450px" src="~/img/blog/@Model.ElementAt(i).BlogsImageSections.FirstOrDefault().Image" />
+            <div class="bi-text">
+                <span class="b-tag">@Model.ElementAt(i).Title</span>
+                <h4><a href="./blog-details.html">@Model.ElementAt(i).TravelPlace</a></h4>
+                <div class="b-time"><i class="icon_clock_alt"></i> @day th @mon, @year</div>
+            </div>
+        </div>
+    </div>
+}

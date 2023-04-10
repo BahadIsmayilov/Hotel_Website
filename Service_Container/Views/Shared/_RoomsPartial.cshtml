@@ -1,0 +1,35 @@
+﻿@model IEnumerable<HomeRoomSection>
+
+@foreach (var room in Model)
+{
+    <div class="col-lg-4 col-md-6">
+        <div class="room-item">
+            <img src="~/img/room/@room.HomeImageRoomSections.FirstOrDefault().Image">
+            <div class="ri-text">
+                @*<h4>@room.Title</h4>*@
+                <h3>@room.Cost$<span>/Pernight</span></h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="r-o">Size:</td>
+                            <td>@room.Size ft</td>
+                        </tr>
+                        <tr>
+                            <td class="r-o">Capacity:</td>
+                            <td>Max persion @room.Capacity</td>
+                        </tr>
+                        <tr>
+                            <td class="r-o">Bed:</td>
+                            <td>@room.BedType</td>
+                        </tr>
+                        <tr>
+                            <td class="r-o">Services:</td>
+                            <td>@room.Service.Substring(0, 27)...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="primary-btn">More Details</a>
+            </div>
+        </div>
+    </div>
+}

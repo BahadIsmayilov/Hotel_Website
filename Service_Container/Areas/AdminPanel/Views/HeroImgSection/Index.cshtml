@@ -1,0 +1,54 @@
+﻿@model IEnumerable<HeroImgSection>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="container-fluid">
+                    <div class="row" style="margin: 30px 0;">
+                        <div class="col-12">
+                            <a asp-action="Create" class="btn btn-primary btn-block">
+                                <i class="fas fa-plus"></i> Create New HeroSection
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>UpdateDate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach (var item in @Model)
+                            {
+                                <td>
+                                    <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/hero/@item.Image" />
+
+                                </td>
+                                <td>
+                                    @item.UpdateDate
+                                </td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <a title="See Details" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                    <a title="Edit HeroText" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+
+                                    @if (@Model.Count() > 1)
+                                    {
+                                        <a title="Edit HeroText" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-pencil"></i></a>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
