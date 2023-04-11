@@ -60,6 +60,11 @@ namespace Service_Container
 
             app.UseEndpoints(endpoints =>
             {
+                // route for AdminPanel
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
                 // route for admin and reseptioner
                 endpoints.MapControllerRoute(
                     name: "areas",
