@@ -19,7 +19,7 @@ namespace Service_Container.Extensions
             return (file.Length / 1024 / 1024) > mb;
         }
 
-        public async static Task<string> Save(this IFormFile file, string root, string folder)
+        public async static Task<string> Save(this IFormFile file,string root,string folder)
         {
             string path = Path.Combine(root, "img");
 

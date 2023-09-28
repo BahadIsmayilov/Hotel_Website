@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using static Service_Container.Extensions.IFormFileExtensions;
 using static Service_Container.Utulities.Utulitie;
 
+
 namespace Service_Container.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
@@ -60,13 +61,18 @@ namespace Service_Container.Areas.AdminPanel.Controllers
                 return View(heroImg);
             }
 
-            if (heroImg.Photo.IsLessThan(2))
+
+            if (!heroImg.Photo.IsLessThan(2))
+
             {
                 ModelState.AddModelError("Photo", "File size cann't be more than 2 mb");
                 return View(heroImg);
             }
 
-            string fileName = await heroImg.Photo.Save(_env.WebRootPath, "hero");
+
+
+           string fileName= await heroImg.Photo.Save(_env.WebRootPath, "hero");
+
 
             heroImg.Image = fileName;
             await _context.HeroImgSections.AddAsync(heroImg);
@@ -74,6 +80,7 @@ namespace Service_Container.Areas.AdminPanel.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();

@@ -8,7 +8,7 @@ namespace Service_Container.Utulities
 {
     public static class Utulitie
     {
-        public static bool RemoveImage(string root, string folder, string image)
+        public static bool RemoveImage(string root,string folder,string image)
         {
             string path = Path.Combine(root, "img", folder, image);
 
