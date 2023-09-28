@@ -1,0 +1,54 @@
+﻿@model AboutTextSection
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="container-fluid">
+                    <div class="row" style="margin: 30px 0;">
+                        <div class="col-12">
+                            <a asp-action="Create" class="btn btn-primary btn-block">
+                                <i class="fas fa-plus"></i> Create New AboutUsTextSection
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>AboutCompanyActivity</th>
+                            <th>UpdateDate</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Title
+                            </td>
+                            <td>
+                                @Model.AboutCompanyActivity
+                            </td>
+                            <td>
+                                @Model.UpdateDate
+                            </td>
+                            <td style="vertical-align:middle; text-align:center;">
+                                <a title="See Details" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                <a title="Edit AboutUsText" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                <a title="Delete AboutUsText" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

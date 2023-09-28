@@ -16,7 +16,7 @@ namespace Service_Container.Extensions
         }
         public static bool IsLessThan(this IFormFile file, int mb)
         {
-            return file.Length / 1024 / 1024 > mb;
+            return (file.Length / 1024 / 1024) > mb;
         }
 
         public async static Task<string> Save(this IFormFile file,string root,string folder)

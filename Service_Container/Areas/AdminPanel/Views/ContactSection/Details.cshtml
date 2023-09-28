@@ -1,0 +1,45 @@
+﻿@model ContactInfo
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p><b>Header</b></p> @Model.Header
+        </div>
+        <div class="col-12">
+            <p><b>PhoneNumber </b> </p> @Model.PhoneNumber
+        </div>
+        <div class="col-12">
+            <p><b>Fax </b> </p> @Model.Fax
+        </div>
+        <div class="col-12">
+            <p><b>Mail </b> </p> @Model.Mail
+        </div>
+        <div class="col-12">
+            <p><b>Address </b> </p> @Model.Address
+        </div>
+        <div class="col-12">
+            <p><b>Text </b> </p> @Model.Text
+        </div>
+        <div class="col-12">
+            <p><b>Map </b> </p> @Model.Map
+        </div>
+        <div class="col-12">
+            <p><b>UpdateDate </b> </p> @Model.UpdateDate
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <a title="Edit HeroText" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-block btn-lg" style="margin: 30px 0">
+            <i class="fa fa-pencil"></i> Edit
+        </a>
+        <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+            <i class="fas fa-long arrow-alt-left"></i> Back to Index
+        </a>
+    </div>
+</div>
+

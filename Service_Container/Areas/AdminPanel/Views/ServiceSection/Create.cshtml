@@ -1,0 +1,24 @@
+﻿@model ServiceSection
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Icon"></label>
+        <input asp-for="Icon" class="form-control" />
+        <span asp-validation-for="Icon" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-success btn-lg btn-block" value="Create" />
+    <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+        <i class="fas fa-long arrow-alt-left"></i> Back to Index
+    </a>
+</form>
+

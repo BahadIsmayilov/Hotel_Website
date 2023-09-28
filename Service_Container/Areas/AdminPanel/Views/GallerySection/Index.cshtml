@@ -1,0 +1,41 @@
+﻿@model GallerySection
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>SubTitle</th>
+                            <th>Update Date</th>
+                            <th>Tool</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Title
+                            </td>
+                            <td>
+                                @Model.SubTitle
+                            </td>
+                            <td>
+                                @Model.UpdateDate
+                            </td>
+                            <td style="vertical-align:middle; text-align:center;">
+                                <a title="Edit GallerySection" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+

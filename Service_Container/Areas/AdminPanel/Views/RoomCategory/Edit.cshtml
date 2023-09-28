@@ -1,0 +1,13 @@
+﻿@model HomeRoomCategorySection
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-warning btn-lg btn-block" value="Edit" />
+    <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+        <i class="fas fa-long arrow-alt-left"></i> Back to Index
+    </a>
+</form>

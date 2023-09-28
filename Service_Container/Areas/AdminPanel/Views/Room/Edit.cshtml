@@ -1,0 +1,41 @@
+﻿@model HomeRoomSection
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="BedType"></label>
+        <input asp-for="BedType" class="form-control" />
+        <span asp-validation-for="BedType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoomNumber"></label>
+        <input asp-for="RoomNumber" class="form-control" />
+        <span asp-validation-for="RoomNumber"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Size"></label>
+        <input asp-for="Size" class="form-control" />
+        <span asp-validation-for="Size" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Capacity"></label>
+        <input asp-for="Capacity" class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cost"></label>
+        <input asp-for="Cost" class="form-control" />
+        <span asp-validation-for="Cost"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Service"></label>
+        <input asp-for="Service" class="form-control" />
+        <span asp-validation-for="Service"></span>
+    </div>
+    <input type="submit" class="btn btn-success btn-lg btn-block" value="Edit" />
+    <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+        <i class="fas fa-long arrow-alt-left"></i> Back to Index
+    </a>
+</form>

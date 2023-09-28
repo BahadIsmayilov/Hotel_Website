@@ -1,0 +1,63 @@
+﻿@model ContactInfo
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Header</th>
+                            <th>Address</th>
+                            <th>PhoneNumber</th>
+                            <th>Mail</th>
+                            <th>Fax</th>
+                            <th>Text</th>
+                            <th>Map text</th>
+                            <th>Update Date</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Header
+                            </td>
+                            <td>
+                                @Model.Address
+                            </td>
+                            <td>
+                                @Model.PhoneNumber
+                            </td>
+                            <td>
+                                @Model.Mail
+                            </td>
+                            <td>
+                                @Model.Fax
+                            </td>
+                            <td>
+                                @Model.Text.Substring(0, 70)...
+                            </td>
+                            <td>
+                                @Model.Map.Substring(0, 70)...
+                            </td>
+                            <td>
+                                @Model.UpdateDate
+                            </td>
+                            <td style="vertical-align:middle; text-align:center;">
+                                <a title="See Details" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                <a title="Edit Contact" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

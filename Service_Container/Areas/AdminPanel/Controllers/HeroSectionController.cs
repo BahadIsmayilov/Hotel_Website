@@ -13,7 +13,6 @@ namespace Service_Container.Areas.AdminPanel.Controllers
     [Area("AdminPanel")]
     public class HeroSectionController : Controller
     {
-        //private readonly IMapper _mapper;
         private readonly AppDbContext _context;
 
         public HeroSectionController(AppDbContext context)

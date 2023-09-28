@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static Service_Container.Extensions.IFormFileExtensions;
 using static Service_Container.Utulities.Utulitie;
-;
+
 
 namespace Service_Container.Areas.AdminPanel.Controllers
 {
@@ -45,7 +45,7 @@ namespace Service_Container.Areas.AdminPanel.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  async Task<IActionResult> Create(HeroImgSection heroImg)
+        public async Task<IActionResult> Create(HeroImgSection heroImg)
         {
             if (!ModelState.IsValid) return View(heroImg);
 
@@ -61,14 +61,18 @@ namespace Service_Container.Areas.AdminPanel.Controllers
                 return View(heroImg);
             }
 
+
             if (!heroImg.Photo.IsLessThan(2))
+
             {
                 ModelState.AddModelError("Photo", "File size cann't be more than 2 mb");
                 return View(heroImg);
             }
 
 
+
            string fileName= await heroImg.Photo.Save(_env.WebRootPath, "hero");
+
 
             heroImg.Image = fileName;
             await _context.HeroImgSections.AddAsync(heroImg);

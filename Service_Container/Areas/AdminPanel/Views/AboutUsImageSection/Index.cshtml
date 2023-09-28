@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AboutUsImageSection>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row" style="margin: 30px 0;">
+        <div class="col-12">
+            <a asp-action="Create" class="btn btn-primary btn-block" target="_blank">
+                <i class="fa-solid fa-plus"></i> Create New AboutUsImageSection
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Image Title</th>
+            <th>Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/about/@item.Image" />
+                </td>
+                <td>
+                    @item.ImageTitle
+                </td>
+                <td style="vertical-align:middle; text-align:center;">
+                    <a title="See Details" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success" target="_blank"><i class="fa fa-eye"></i></a>
+                    <a title="Edit AboutUsImage" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" target="_blank"><i class="fa fa-pencil"></i></a>
+
+                    @if (@Model.Count() > 1)
+                    {
+                        <a title="Delete AboutUsImage" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" target="_blank"><i class="fa fa-trash-o"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

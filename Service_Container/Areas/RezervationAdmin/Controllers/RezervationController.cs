@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Service_Container.Areas.Config;
@@ -12,7 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
-
+using Service_Container.SDUtilities;
+using Service_Container.Controllers;
 namespace Service_Container.Areas.RezervationAdmin.Controllers
 {
     [Area("RezervationAdmin")]
@@ -26,10 +28,16 @@ namespace Service_Container.Areas.RezervationAdmin.Controllers
             _context = context;
             _mapper = mapper;
         }
+        [Authorize(Roles = SD.AdminRole + ", " + SD.ModeratorRole + ", " + SD.MemberRole)]
         public IActionResult Index()
         {
-            return View();
+            if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.ModeratorRole))
+                return View();
+            else
+                return Redirect("/Account/LogIn");
+
         }
+        [Authorize(Roles = SD.AdminRole + ", " + SD.ModeratorRole)]
         public async Task<IActionResult> GetAllRezervations()
         {
             var rezerved =await _context.Bookings.Include(x => x.RoomOrderStatus)
@@ -59,6 +67,7 @@ namespace Service_Container.Areas.RezervationAdmin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = SD.AdminRole + ", " + SD.ModeratorRole)]
         public async Task<IActionResult> GetAllRezervations(string customerName)
         {
             ViewData["GetCustomer"] = customerName;
@@ -77,8 +86,8 @@ namespace Service_Container.Areas.RezervationAdmin.Controllers
             return View(findRezervation);
         }
 
-        
-        public  JsonResult UpdateOrderStatus(int id)
+        [Authorize(Roles = SD.AdminRole + ", " + SD.ModeratorRole)]
+        public JsonResult UpdateOrderStatus(int id)
         {
             var findCustomer = _context.Bookings.Include(x => x.RoomOrderStatus).FirstOrDefault(x => x.Id == id);
             if (findCustomer != null)
@@ -96,13 +105,18 @@ namespace Service_Container.Areas.RezervationAdmin.Controllers
             }
         }
         [HttpGet]
+        [Authorize(Roles = SD.AdminRole + ", " + SD.ModeratorRole + ", " + SD.MemberRole)]
         public IActionResult Create()
         {
             ViewData["Category"] = _context.HomeRoomCategorySections.ToList();
-            return View();
+            if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.ModeratorRole) || User.IsInRole(SD.MemberRole))
+                return View();
+            else
+                return Redirect("/Account/LogIn");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.AdminRole + ", " + SD.ModeratorRole + ", " + SD.MemberRole)]
         public async Task<IActionResult> Create(BookingDto booking)
         {
             ViewData["Category"] = _context.HomeRoomCategorySections.ToList();
@@ -128,7 +142,10 @@ namespace Service_Container.Areas.RezervationAdmin.Controllers
 
            await _context.Bookings.AddAsync(_mapper.Map<Booking>(booking));
            await _context.SaveChangesAsync();
-           return RedirectToAction(nameof(Index));
+            if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.ModeratorRole))
+                return RedirectToAction(nameof(Index));
+            else
+                return RedirectToAction("/");
         }
 
         [HttpGet]

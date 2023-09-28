@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ServiceSection>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row" style="margin: 30px 0;">
+                        <div class="col-12">
+                            <a asp-action="Create" class="btn btn-primary btn-block">
+                                <i class="fas fa-plus"></i> Create New ServiceSection
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Icon</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+                                <td>
+                                    @item.Icon
+                                </td>
+                                <td>
+                                    @item.Title
+                                </td>
+                                <td>
+                                    @item.Description
+                                </td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <a title="See Details" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                    <a title="Edit ServiceSection" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                    @if(@Model.Count()>3){
+                                    <a title="Delete ServiceSection" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    }
+                                </td>
+                                }
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

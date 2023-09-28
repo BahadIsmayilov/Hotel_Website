@@ -1,0 +1,45 @@
+﻿@model HomeRoomSection
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p><b>Image</b></p>@Model.HomeImageRoomSections.FirstOrDefault()
+        </div>
+        <div class="col-12">
+            <p><b>Category Name</b></p> @Model.HomeRoomCategorySection.Name
+        </div>
+        <div class="col-12">
+            <p><b>BedType</b></p>@Model.BedType
+        </div>
+        <div class="col-12">
+            <p><b>RoomNumber</b></p>@Model.RoomNumber
+        </div>
+        <div class="col-12">
+            <p><b>Size</b></p>@Model.Size
+        </div>
+        <div class="col-12">
+            <p><b>Capacity</b></p>@Model.Capacity
+        </div>
+        <div class="col-12">
+            <p><b>Cost</b></p>@Model.Cost
+        </div>
+        <div class="col-12">
+            <p><b>Service</b></p>@Model.Service
+        </div>
+        <div class="col-12" style="margin-top:10px;">
+            <p><b>UpdateDate </b> </p> @Model.UpdateDate
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <a title="Edit HeroText" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-block btn-lg" style="margin: 30px 0">
+            <i class="fa fa-pencil"></i> Edit
+        </a>
+        <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+            <i class="fas fa-long arrow-alt-left"></i> Back to Index
+        </a>
+    </div>
+</div>

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="~/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    @*<link rel="stylesheet" href="~/css/nice-select.css" type="text/css">*@
     <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
@@ -38,7 +38,7 @@
     <div class="canvas-open">
         <i class="icon_menu"></i>
     </div>
-  
+
     <!-- Offcanvas Menu Section End -->
     <!-- Header Section Begin -->
     <header class="header-section">
@@ -53,23 +53,18 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                            <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                            <a asp-area="RezervationAdmin" asp-controller="Rezervation" asp-action="Index" class="bk-btn">Booking Now</a>
-                            <div class="language-option">
-                                <img src="~/img/flag.jpg" alt="">
-                                <span>EN <i class="fa fa-angle-down"></i></span>
-                                <div class="flag-dropdown">
-                                    <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a  asp-area="RezervationAdmin" asp-controller="Rezervation" asp-action="Create" class="bk-btn">Booking Now</a>
+                                <a style="margin-left:10px;" asp-controller="Account" asp-action="LogOut" class="bk-btn">Logout</a>
+                                <span style="margin-left:150px;">@User.Identity.Name</span>
+
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Register" class="bk-btn">Sign in</a>
+                                <a asp-controller="Account" asp-action="Login" class="bk-btn">Login</a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -92,7 +87,10 @@
                                     <li class="active"><a href="/">Home</a></li>
                                     <li><a href="/Rooms/Index">Rooms</a></li>
                                     <li><a href="/AboutUs/Index">About Us</a></li>
+                                    @if (User.IsInRole(SD.MemberRole) || User.IsInRole(SD.AdminRole) || User.IsInRole(SD.ModeratorRole))
+                                    {
                                     <li><a href="/News/Index">News</a></li>
+                                    }
                                     <li><a href="/Contact/Index">Contact</a></li>
                                 </ul>
                             </nav>
@@ -108,7 +106,6 @@
     <!-- Header End -->
 
     @RenderBody();
-
     <!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">
@@ -194,11 +191,14 @@
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/js/jquery.nice-select.min.js"></script>
+    @*<script src="~/js/jquery.nice-select.min.js"></script>*@
     <script src="~/js/jquery-ui.min.js"></script>
     <script src="~/js/jquery.slicknav.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
+    <script src="~/js/account.js"></script>
+
+    @RenderSection("Scripts",required: false)
 </body>
 
 </html>
