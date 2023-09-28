@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HomeRoomCategorySection>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row" style="margin: 30px 0;">
+                        <div class="col-12">
+                            <a asp-action="Create" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-plus"></i> Create New RoomCategory
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>UpdateDate</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach (var item in @Model)
+                            {
+                                <td>
+                                    <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/room/@item.HomeRoomSections.FirstOrDefault().HomeImageRoomSections.FirstOrDefault().Image" />
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td style="vertical-align:middle; text-align:center;">
+                                    <a title="Edit RoomCategory" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+
+                                    @if (@Model.Count() > 1)
+                                    {
+                                        <a title="Delete RoomCategory" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model AboutTextSection
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p><b>Title</b></p>@Model.Title
+        </div>
+        <div class="col-12">
+            <p><b>AboutCompanyActivity</b></p>@Model.AboutCompanyActivity
+        </div>
+        <div class="col-12">
+            <p><b>UpdateDate</b></p>@Model.UpdateDate
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form method="post">
+            <div class="alert alert-danger">
+                <p style="padding-top:0;"><b>Are you sure to delete this AboutUsPrefernceSection</b></p>
+            </div>
+            <input type="submit" value="Delete" class="btn btn-block btn-lg btn-danger" />
+        </form>
+        <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+            <i class="fas fa-long arrow-alt-left"></i> Back to Index
+        </a>
+    </div>
+</div>
+

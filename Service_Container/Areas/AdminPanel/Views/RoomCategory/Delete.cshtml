@@ -1,0 +1,23 @@
+﻿@model HomeRoomCategorySection
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p><b>Category Name</b></p> @Model.Name
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form method="post">
+            <div class="alert alert-danger">
+                <p style="padding-top:0;"><b>Are you sure to delete this RoomCategory</b></p>
+            </div>
+            <input type="submit" value="Delete" class="btn btn-block btn-lg btn-danger" />
+        </form>
+        <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+            <i class="fas fa-long arrow-alt-left"></i> Back to Index
+        </a>
+    </div>
+</div>

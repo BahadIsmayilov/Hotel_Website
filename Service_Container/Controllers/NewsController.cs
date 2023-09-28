@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Service_Container.DAL;
 using Service_Container.Models.ViewModels;
@@ -6,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Service_Container.SDUtilities;
 namespace Service_Container.Controllers
 {
     public class NewsController : Controller
@@ -16,10 +17,13 @@ namespace Service_Container.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles=SD.AdminRole+", "+SD.ModeratorRole+ ", "+SD.MemberRole)]
         public IActionResult Index()
         {
             ViewBag.TotalCount = _context.BlogsSections.Count();
-            return View(_context.BlogsSections.Include(x => x.BlogsImageSections).OrderByDescending(x => x.Id).Take(6));
+            return View(_context.BlogsSections.Include(x => x.BlogsImageSections)
+                                              .OrderByDescending(x => x.Id)
+                                              .Take(6));
         }
         public IActionResult LoadImages(int skip)
         {
@@ -35,7 +39,10 @@ namespace Service_Container.Controllers
             //   })
             //});
             #endregion
-            var model = _context.BlogsSections.Include(x => x.BlogsImageSections).OrderByDescending(x => x.Id).Skip(skip).Take(3);
+            var model = _context.BlogsSections.Include(x => x.BlogsImageSections)
+                                              .OrderByDescending(x => x.Id)
+                                              .Skip(skip)
+                                              .Take(3);
 
             return PartialView("_BlogsPartial", model);
 

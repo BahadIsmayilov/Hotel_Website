@@ -35,7 +35,7 @@ namespace Service_Container.Controllers
         {
             if(id==null) return NotFound();
 
-            HomeRoomSection homeRoom =await _context.HomeRoomSections.Include(x=>x.HomeImageRoomSections).FirstOrDefaultAsync(x=>x.Id==id);
+            HomeRoomSection homeRoom = await _context.HomeRoomSections.Include(x=>x.HomeImageRoomSections).FirstOrDefaultAsync(x=>x.Id==id);
 
             if (homeRoom == null) return NotFound();
 

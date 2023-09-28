@@ -9,12 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Service_Container.Models.UserResgistration;
+using Microsoft.AspNetCore.Identity;
 
 namespace Service_Container.DAL
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> option):base(option)
+        public AppDbContext(DbContextOptions<AppDbContext> option) :base(option)
         {
         }
 
@@ -37,10 +40,14 @@ namespace Service_Container.DAL
         public DbSet<RoomOrderStatus> RoomOrderStatuses { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<HomeRoomCategorySection> HomeRoomCategorySections { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+
+
         }
     }
 }

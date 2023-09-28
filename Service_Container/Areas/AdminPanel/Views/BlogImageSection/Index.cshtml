@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BlogsImageSection>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row" style="margin: 30px 0;">
+        <div class="col-12">
+            <a asp-action="Create" class="btn btn-primary btn-block" target="_blank">
+                <i class="fa-solid fa-plus"></i> Create New BlogImageSection
+            </a>
+        </div>
+    </div>
+</div>
+<form method="post" asp-area="AdminPanel" asp-controller="BlogImageSection" asp-action="Index">
+    <p>
+        <input type="search" placeholder="Enter CategoryName" value="@ViewData["GetTitle"]" name="title" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title Name</th>
+            <th>Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/blog/@item.Image" />
+                </td>
+                <td>
+                    @item.BlogsSection.Title
+                </td>
+                <td style="vertical-align:middle; text-align:center;">
+                    <a title="See Details" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success" target="_blank"><i class="fa fa-eye"></i></a>
+                    <a title="Edit BlogImageSection" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning" target="_blank"><i class="fa fa-pencil"></i></a>
+
+                    @if (@Model.Count() > 1)
+                    {
+                        <a title="Delete BlogImageSection" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" target="_blank"><i class="fa fa-trash-o"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

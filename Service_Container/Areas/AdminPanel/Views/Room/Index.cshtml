@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HomeRoomSection>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row" style="margin: 30px 0;">
+        <div class="col-12">
+            <a asp-action="Create" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-plus"></i> Create New RoomSection
+            </a>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Category Name</th>
+                <th>BedType</th>
+                <th>RoomNumber</th>
+                <th>Size</th>
+                <th>Capacity</th>
+                <th>Cost</th>
+                <th>Service</th>
+                <th>UpdateDate</th>
+                <th>Tools</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in @Model)
+                {
+                    <td>
+                        <img class="hs-item set-bg" style="width:200px; height:200px;" src="~/img/room/@item.HomeImageRoomSections.FirstOrDefault().Image" />
+                    </td>
+                    <td>
+                        @item.HomeRoomCategorySection.Name
+                    </td>
+                    <td>
+                        @item.BedType
+                    </td>
+                    <td>
+                        @item.RoomNumber
+                    </td>
+                    <td>
+                        @item.Size
+                    </td>
+                    <td>
+                        @item.Capacity
+                    </td>
+                    <td>
+                        @item.Cost
+                    </td>
+                    <td>
+                        @item.Service.Substring(0,30)...
+                    </td>
+                    <td>
+                        @item.UpdateDate
+                    </td>
+                    <td style="vertical-align:middle; text-align:center;">
+                        <a title="See Details" asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                        <a title="Edit RoomSection" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+
+                        @if (@Model.Count() > 1)
+                        {
+                            <a title="Delete RoomSection" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                        }
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>

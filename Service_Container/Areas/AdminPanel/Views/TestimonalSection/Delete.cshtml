@@ -1,0 +1,32 @@
+﻿@model TestimonialSection
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p><b>Image</b></p><img src="~/img/@Model.Image" />
+        </div>
+        <div class="col-12">
+            <p><b>UserName</b></p> @Model.User
+        </div>
+        <div class="col-12">
+            <p><b>Comment</b></p> @Model.Comment
+        </div>
+    </div>
+</div>
+
+<div style="padding-top:10px;" class="row">
+    <div class="col-12">
+        <form method="post">
+            <div class="alert alert-danger">
+                <p style="padding-top:0;"><b>Are you sure to delete this Image of Testimonial</b></p>
+            </div>
+            <input type="submit" value="Delete" class="btn btn-block btn-lg btn-danger" />
+        </form>
+        <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+            <i class="fas fa-long arrow-alt-left"></i> Back to Index
+        </a>
+    </div>
+</div>

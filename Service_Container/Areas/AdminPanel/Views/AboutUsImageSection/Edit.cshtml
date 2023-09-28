@@ -1,0 +1,25 @@
+﻿@model AboutUsImageSection
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Photo"></label>
+        <input asp-for="Photo" class="form-control" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Current Picture</label>
+        <img src="~/img/about/@Model.Image" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageTitle"></label>
+        <input asp-for="ImageTitle" class="form-control" />
+        <span asp-validation-for="ImageTitle" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-success btn-lg btn-block" value="Edit" />
+    <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0">
+        <i class="fas fa-long arrow-alt-left"></i> Back to Index
+    </a>
+</form>

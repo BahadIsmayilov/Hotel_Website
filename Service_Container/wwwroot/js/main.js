@@ -50,8 +50,8 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
@@ -60,7 +60,7 @@
     /*------------------
         Hero Slider
     --------------------*/
-   $(".hero-slider").owlCarousel({
+    $(".hero-slider").owlCarousel({
         loop: true,
         margin: 0,
         items: 1,
@@ -74,7 +74,7 @@
     });
 
     /*------------------------
-		Testimonial Slider
+        Testimonial Slider
     ----------------------- */
     $(".testimonial-slider").owlCarousel({
         items: 1,
@@ -94,16 +94,16 @@
     });
 
     /*------------------
-		Date Picker
-	--------------------*/
+        Date Picker
+    --------------------*/
     $(".date-input").datepicker({
         minDate: 0,
         dateFormat: 'dd MM, yy'
     });
 
     /*------------------
-		Nice Select
-	--------------------*/
+        Nice Select
+    --------------------*/
     $("select").niceSelect();
 
     var numberofPropertyTaken = 6;

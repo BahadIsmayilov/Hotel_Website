@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Service_Container.Models.UserResgistration;
+using Microsoft.AspNetCore.Identity;
 
 namespace Service_Container
 {
@@ -34,6 +37,31 @@ namespace Service_Container
             {
                 option.UseSqlServer(Configuration["ConnectionStrings:Default"]);
             });
+
+            services.Configure<CookiePolicyOptions>(option =>
+            {
+                option.CheckConsentNeeded = context => true;
+                option.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(identityOptions=>
+            {
+                identityOptions.Password.RequireDigit = true;
+                identityOptions.Password.RequireLowercase = true;
+                identityOptions.Password.RequireUppercase = true;
+                identityOptions.Password.RequireNonAlphanumeric = true;
+                identityOptions.Password.RequiredLength = 8;
+
+                identityOptions.User.RequireUniqueEmail = true;
+
+                identityOptions.Lockout.MaxFailedAccessAttempts = 3;
+                identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                identityOptions.Lockout.AllowedForNewUsers = false;
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,13 +81,16 @@ namespace Service_Container
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                // route for adminpanel
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
                 // route for admin and reseptioner
                 endpoints.MapControllerRoute(
                     name: "areas",
